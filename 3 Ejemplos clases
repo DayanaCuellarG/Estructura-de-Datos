@@ -1,0 +1,243 @@
+EJERCICIO 1
+clase
+
+#include <iostream>
+#include "conio.h"
+#include "stdafx.h"
+
+using namespace std;
+
+class Naturales
+{private:
+int entero;
+public:
+    int get_entero()
+    {return entero;}
+    void set_entero(int e)              //METODOS DE ACCESO
+    {entero=e;}
+
+bool mayor(Naturales y)
+{
+    if(y.entero>entero)
+        {return true;}
+    else
+        {return false;}
+}
+
+int contar_digitos()
+{ int contador = 0,i;
+i=entero;
+while(i>0)
+    {
+        i = i / 10;
+        contador++;
+    }
+return contador;
+}
+
+Naturales unir(Naturales y)
+{ int i,conta;
+  Naturales c;
+i = entero;
+conta = y.contar_digitos();
+    while(conta>0)
+    {
+        i = i * 10;
+        conta = conta - 1 ;
+    }
+
+    i = i + y.entero;
+    c.entero = i;
+    return c;
+}
+void leer()
+{
+    cout<<"Ingrese el numero a unir"<< endl;
+    cin>>entero;
+}
+
+void mostrar()
+{
+    cout<<"La suma de enteros es: "<< endl;
+    cout<<entero;
+}
+
+
+
+};
+
+
+main 
+
+#include <iostream>
+#include "conio.h"
+#include "stdafx.h"
+#include "Naturales.h"
+
+
+using namespace std;
+void main()
+
+{
+    Naturales a,b,c;
+
+    a.leer();
+    b.leer();
+    if(a.mayor(b)==true)
+    {
+        c= a.unir(b);
+    }
+    else
+    {
+        c= b.unir(a);
+    }
+    c.mostrar();
+    getchar();
+    getchar();
+}
+
+
+EJEMPLO 2
+Clase
+
+#pragma once
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Invertir.h"
+
+using namespace std;
+
+class Invertir
+{
+private:
+    int numero;
+public:
+    int get_numero(){
+        return numero;
+    }
+
+    void set_numero(int y){
+        numero=y;
+    }
+
+    int contar_digitos(){ 
+    int contador = 0, i;
+    i=numero;
+    while(i>0)
+    {
+        i = i / 10;
+        contador++;
+    }
+return contador;
+}
+    int inver(){
+        int in=0, aux=numero;
+        while(aux>0){
+            in=in*10+aux%10;
+            aux=aux/10;
+        }
+        return in;
+            
+    }
+
+    void leer(){
+        cout<<"Ingrese el numero a invertir: ";
+        cin>>numero;
+    }
+    void mostrar(){
+        cout<<"El numero invertido es: "<<numero;
+    }
+};
+
+Main
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Invertir.h"
+
+using namespace std;
+
+
+void main(){
+
+    Invertir a; int b;
+    a.leer();
+    b=a.inver();
+    cout<<b;
+    getchar();
+    getchar();
+}
+
+
+EJEMPLO 3
+Clase
+
+#pragma once
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+class Palindromo
+{
+private:
+    int numero;
+public:
+    int get_numero(){
+    return numero;
+    }
+
+    void set_numero(int num){
+        numero=num;
+    }
+    
+    int contar_digitos(){ 
+    int contador=0, i;
+    i=numero;
+    while(i>0)
+    {
+        i = i / 10;
+        contador++;
+    }
+return contador;
+}
+
+    void pal(Palindromo num){
+        int nuevonumero=0, extraer=0, temp=numero;
+        for (int i=0; i<num.contar_digitos(); i++){
+            extraer=temp%10;
+            nuevonumero=(nuevonumero*10)+extraer;
+            temp=temp/10;
+        }
+        if (nuevonumero==numero)
+            cout<<"Es Palindromo";
+        else    cout<<"No es palindromo";
+
+    }
+    void leer(){
+    cout<<"Ingrese el numero"<<endl;
+    cin>>numero;
+    }
+};
+
+Main
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Palindromo.h"
+
+using namespace std;
+
+void main(){
+    Palindromo P;
+    P.leer();
+    P.contar_digitos();
+    P.pal(P);
+    getchar();
+    getchar();
+}
+
