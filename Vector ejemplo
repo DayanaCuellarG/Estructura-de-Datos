@@ -1,0 +1,58 @@
+#include "StdAfx.h"
+#include "Vector.h"
+#include "iostream"
+using namespace std;
+
+Vector::Vector(void)
+{
+	vec[10]=0; //Por si no ponemos ningún valor, lo estamos dejando en cero.
+	n=0;
+}
+
+
+Vector::~Vector(void)
+{
+}
+
+void Vector::cargarVector(int vec[], int n){
+	for(int i=0;i<n;i++){
+		cout<<"vec["<<i<<"] =" ;
+		cin>>vec[i];
+	}
+}
+
+void Vector::mostrarVector(int vec[], int n){
+	for(int i=0;i<n;i++){
+		cout<<vec[i]<<", ";
+	}
+	cout<<endl;
+}
+
+void Vector::ordenarVector(int vec[], int n) //Este va de forma asccendente
+{
+	int aux;
+	for(int i=0; i<(n-1); i++){
+		for(int j=i; j<n; j++){
+			if(vec[i] > vec[j]){ // Descendente este cambia a <
+				aux = vec[i];
+				vec[i] = vec[j];
+				vec[j] = aux;
+			}
+		}
+	}
+}
+
+
+#pragma once
+class Vector
+{private:
+	int vec[10], n;
+public:
+Vector(void); // constructor
+~Vector(void); //destructor
+
+void cargarVector(int vec[], int n); //metodos
+void mostrarVector(int vec[], int n);
+void ordenarVector(int vec[], int n);
+
+};
