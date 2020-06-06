@@ -1,0 +1,342 @@
+#include "StdAfx.h"
+#include "Complejo.h"
+
+
+Complejo::Complejo(void)
+{
+}
+
+	Complejo::Complejo(double r, double i)
+	{  real=r;
+	  imag= i;
+	}
+	void Complejo::Set_real(double r)
+	{ real = r;
+	}
+	void Complejo::Set_imag(double i)
+	{ imag=i;
+	}
+	double Complejo::Get_real()
+	{ return real; // Tengo que devolver el atributo
+	}
+	double Complejo::Get_imag()
+	{ return imag;
+	}
+	void Complejo::suma(Complejo a, Complejo b)
+	{ real = a.real +b.real; // el punto sirve para referirse a un atributo o método del objeto, en este caso a y b
+	  imag=  a.imag + b.imag;
+	}
+
+#pragma once
+ class Complejo
+{
+private:
+	double real, imag;
+public:
+	Complejo(void); //Los pongo con el nombre que llamé a mi clase
+	Complejo(double r, double i);
+	void Set_real(double r);
+	void Set_imag(double i);
+	double Get_real();
+	double Get_imag();
+	void suma(Complejo a, Complejo b); //me estoy enviando objetos de la clase Comlejo, osea a tiene una parte real e imaginaria y lo mismo con b, a yb son objetos
+
+
+
+};
+
+#pragma once
+#include "Complejo.h"
+#include <iostream>
+#include <msclr\marshal_cppstd.h>
+
+namespace Complejos { //
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace std;
+	using namespace msclr::interop;
+
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+
+	protected: 
+
+	private: System::Windows::Forms::TextBox^  txtreal2;
+	private: System::Windows::Forms::TextBox^  txtimag1;
+	private: System::Windows::Forms::TextBox^  txtreal1;
+	private: System::Windows::Forms::TextBox^  txtimag2;
+	private: System::Windows::Forms::Button^  btbsumar;
+
+
+
+
+
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::TextBox^  txtresultadoi;
+
+	private: System::Windows::Forms::TextBox^  txtresultador;
+
+
+
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->txtreal2 = (gcnew System::Windows::Forms::TextBox());
+			this->txtimag1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtreal1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtimag2 = (gcnew System::Windows::Forms::TextBox());
+			this->btbsumar = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->txtresultadoi = (gcnew System::Windows::Forms::TextBox());
+			this->txtresultador = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
+			// 
+			// txtreal2
+			// 
+			this->txtreal2->Location = System::Drawing::Point(102, 169);
+			this->txtreal2->Name = L"txtreal2";
+			this->txtreal2->Size = System::Drawing::Size(78, 20);
+			this->txtreal2->TabIndex = 2;
+			// 
+			// txtimag1
+			// 
+			this->txtimag1->Location = System::Drawing::Point(102, 82);
+			this->txtimag1->Name = L"txtimag1";
+			this->txtimag1->Size = System::Drawing::Size(78, 20);
+			this->txtimag1->TabIndex = 3;
+			// 
+			// txtreal1
+			// 
+			this->txtreal1->Location = System::Drawing::Point(103, 44);
+			this->txtreal1->Name = L"txtreal1";
+			this->txtreal1->Size = System::Drawing::Size(78, 20);
+			this->txtreal1->TabIndex = 4;
+			// 
+			// txtimag2
+			// 
+			this->txtimag2->Location = System::Drawing::Point(102, 211);
+			this->txtimag2->Name = L"txtimag2";
+			this->txtimag2->Size = System::Drawing::Size(78, 20);
+			this->txtimag2->TabIndex = 5;
+			// 
+			// btbsumar
+			// 
+			this->btbsumar->Location = System::Drawing::Point(190, 98);
+			this->btbsumar->Name = L"btbsumar";
+			this->btbsumar->Size = System::Drawing::Size(82, 73);
+			this->btbsumar->TabIndex = 6;
+			this->btbsumar->Text = L"Sumar";
+			this->btbsumar->UseVisualStyleBackColor = true;
+			this->btbsumar->Click += gcnew System::EventHandler(this, &Form1::btbSumar_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(15, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(73, 13);
+			this->label1->TabIndex = 13;
+			this->label1->Text = L"COMPLEJO 1";
+			this->label1->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(15, 146);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(73, 13);
+			this->label2->TabIndex = 14;
+			this->label2->Text = L"COMPLEJO 2";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(33, 47);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(34, 13);
+			this->label3->TabIndex = 15;
+			this->label3->Text = L"P.real";
+			this->label3->Click += gcnew System::EventHandler(this, &Form1::label3_Click);
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(15, 169);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(37, 13);
+			this->label4->TabIndex = 16;
+			this->label4->Text = L"P. real";
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(15, 214);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(67, 13);
+			this->label5->TabIndex = 17;
+			this->label5->Text = L"P. imaginaria";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(12, 82);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(67, 13);
+			this->label6->TabIndex = 18;
+			this->label6->Text = L"P. imaginaria";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(15, 324);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(67, 13);
+			this->label7->TabIndex = 23;
+			this->label7->Text = L"P. imaginaria";
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(15, 279);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(37, 13);
+			this->label8->TabIndex = 22;
+			this->label8->Text = L"P. real";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(15, 256);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(55, 13);
+			this->label9->TabIndex = 21;
+			this->label9->Text = L"Resultado";
+			// 
+			// txtresultadoi
+			// 
+			this->txtresultadoi->Location = System::Drawing::Point(102, 321);
+			this->txtresultadoi->Name = L"txtresultadoi";
+			this->txtresultadoi->Size = System::Drawing::Size(78, 20);
+			this->txtresultadoi->TabIndex = 20;
+			// 
+			// txtresultador
+			// 
+			this->txtresultador->Location = System::Drawing::Point(102, 279);
+			this->txtresultador->Name = L"txtresultador";
+			this->txtresultador->Size = System::Drawing::Size(78, 20);
+			this->txtresultador->TabIndex = 19;
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(284, 387);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->txtresultadoi);
+			this->Controls->Add(this->txtresultador);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->btbsumar);
+			this->Controls->Add(this->txtimag2);
+			this->Controls->Add(this->txtreal1);
+			this->Controls->Add(this->txtimag1);
+			this->Controls->Add(this->txtreal2);
+			this->Name = L"Form1";
+			this->Text = L"SUMA DE COMPLEJOS";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
+			 }
+private: System::Void btbSumar_Click(System::Object^  sender, System::EventArgs^  e) 
+
+		 { Complejo c1,c2; // Creo dos objetos c1 y c2
+           //Le mando el valor que alguien puso en el form se lo mando a c1
+		 c1.Set_real(System::Convert::ToDouble(txtreal1->Text)); // System::Convert::ToDouble para double
+		 c2.Set_real(System::Convert::ToDouble(txtreal2->Text));
+		 c1.Set_imag(System::Convert::ToDouble(txtimag1->Text));
+		 c2.Set_imag(System::Convert::ToDouble(txtimag2->Text));
+		 double sumareal, sumaimag;
+		 sumareal=c1.Get_real()+c2.Get_real();
+		 sumaimag= c1.Get_imag()+c2.Get_imag();
+		 txtresultador->Text=System::Convert::ToString(sumareal);
+		 txtresultadoi->Text=System::Convert::ToString(sumaimag);
+
+
+
+
+
+		 }
+
+
+
+private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void label3_Click(System::Object^  sender, System::EventArgs^  e) {
+		 }
+};
+}
+
