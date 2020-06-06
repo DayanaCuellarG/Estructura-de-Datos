@@ -1,0 +1,438 @@
+#include "StdAfx.h"
+#include "Vector.h"
+using namespace std;
+
+Vector::Vector(void)
+{ V[N]=0;
+tamano=0;
+}
+void Vector::set_V(int elemento, int pos)
+{ V[pos]= elemento;
+}
+	void Vector::set_tamano(int tam)
+	{ tamano=tam;
+	}
+	int Vector::get_V(int pos)
+	{ return V[pos];
+	}
+	int Vector::get_tamano()
+	{ return tamano;
+	}
+	Vector Vector::concatenar (Vector vec1, Vector vec2)
+	{  Vector vec3; //creo este vector porque este va a ser el concatenado de vec1 y vec2
+	   vec3.tamano = vec1.tamano+vec2.tamano; //no pongo set y get después del punto porque no estoy trabajando en el form1.h
+	   for (int k=0; k<vec1.tamano;k++)
+	   { vec3.V[k]=vec1.V[k]; //Estoy pasandole los vectores de vec1 a vec3
+	   }
+	   for (int i=vec1.tamano /*empiezo en lo último que me quedé*/; i<vec3.tamano;i++)
+	   {vec3.V[i]=vec2.V[i-vec1.tamano]; //aquí menos el tamano del vector 1 porque debo recorrer el vector 2 desde 0, también podría hacer otros for, para comenzar el vec2 [0];
+	   }
+
+	   //Ahora los voy a ordenar para mostrarlos
+  int aux;
+  for (int k=0; k<vec3.tamano;k++)
+  { for (int t=k+1; t<vec3.tamano;t++)
+   {  if (vec3.V[t]< vec3.V[k]);
+      {aux = vec3.V[k];
+	   vec3.V[k]= vec3.V[t];
+	   vec3.V[t]=aux;
+      }
+   }
+  }
+
+ return vec3; //Debo enviar un vector porque estoy en vez de int o float Vector(la clase) y este va a devolver un vector
+	}
+  
+  #pragma once
+#include "iostream"
+#define N 50
+using namespace std;
+class Vector
+{
+private:
+	int V[N], tamano;
+public:
+	Vector(void);
+	void set_V(int elemento, int pos);
+	void set_tamano(int tam);
+	int get_V(int pos);
+	int get_tamano();
+	Vector concatenar (Vector vec1, Vector vec2); //aquí estoy creando un método donde envío dos objetos vec1 y vec2 ya ambos heredan todo de la clase madre Vector
+};
+
+#pragma once
+#include "Vector.h"
+
+namespace Concatenar {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace std;
+	Vector v1;
+	Vector v2;
+	Vector v3;
+	int pos=0, pos2=0; // dos variables para los dos vectores porque como son globales afectan entonces una pra v1 y otra para v2
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Label^  label1;
+	protected: 
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::TextBox^  txttamanoA;
+	private: System::Windows::Forms::TextBox^  txtelementoA;
+	private: System::Windows::Forms::Button^  btndefinirA;
+	private: System::Windows::Forms::Button^  btningresarA;
+	private: System::Windows::Forms::DataGridView^  grillaA;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column1;
+	private: System::Windows::Forms::DataGridView^  grillaB;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  dataGridViewTextBoxColumn1;
+	private: System::Windows::Forms::DataGridView^  grillaC;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column2;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::Button^  btningresarB;
+	private: System::Windows::Forms::Button^  btndefinirB;
+	private: System::Windows::Forms::TextBox^  txtelementoB;
+	private: System::Windows::Forms::TextBox^  txttamanoB;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::Button^  btnconcatenar;
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->txttamanoA = (gcnew System::Windows::Forms::TextBox());
+			this->txtelementoA = (gcnew System::Windows::Forms::TextBox());
+			this->btndefinirA = (gcnew System::Windows::Forms::Button());
+			this->btningresarA = (gcnew System::Windows::Forms::Button());
+			this->grillaA = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->grillaB = (gcnew System::Windows::Forms::DataGridView());
+			this->dataGridViewTextBoxColumn1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->grillaC = (gcnew System::Windows::Forms::DataGridView());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->btningresarB = (gcnew System::Windows::Forms::Button());
+			this->btndefinirB = (gcnew System::Windows::Forms::Button());
+			this->txtelementoB = (gcnew System::Windows::Forms::TextBox());
+			this->txttamanoB = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->btnconcatenar = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaA))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaB))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaC))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(60, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(14, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"A";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(12, 56);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(46, 13);
+			this->label2->TabIndex = 1;
+			this->label2->Text = L"Tamaño";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(12, 137);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(51, 13);
+			this->label3->TabIndex = 2;
+			this->label3->Text = L"Elemento";
+			// 
+			// txttamanoA
+			// 
+			this->txttamanoA->Location = System::Drawing::Point(65, 57);
+			this->txttamanoA->Name = L"txttamanoA";
+			this->txttamanoA->Size = System::Drawing::Size(99, 20);
+			this->txttamanoA->TabIndex = 3;
+			// 
+			// txtelementoA
+			// 
+			this->txtelementoA->Location = System::Drawing::Point(65, 134);
+			this->txtelementoA->Name = L"txtelementoA";
+			this->txtelementoA->Size = System::Drawing::Size(99, 20);
+			this->txtelementoA->TabIndex = 4;
+			// 
+			// btndefinirA
+			// 
+			this->btndefinirA->Location = System::Drawing::Point(20, 95);
+			this->btndefinirA->Name = L"btndefinirA";
+			this->btndefinirA->Size = System::Drawing::Size(75, 23);
+			this->btndefinirA->TabIndex = 5;
+			this->btndefinirA->Text = L"Definir";
+			this->btndefinirA->UseVisualStyleBackColor = true;
+			this->btndefinirA->Click += gcnew System::EventHandler(this, &Form1::btndefinirA_Click);
+			// 
+			// btningresarA
+			// 
+			this->btningresarA->Location = System::Drawing::Point(20, 173);
+			this->btningresarA->Name = L"btningresarA";
+			this->btningresarA->Size = System::Drawing::Size(75, 23);
+			this->btningresarA->TabIndex = 6;
+			this->btningresarA->Text = L"Ingresar";
+			this->btningresarA->UseVisualStyleBackColor = true;
+			this->btningresarA->Click += gcnew System::EventHandler(this, &Form1::btningresarA_Click);
+			// 
+			// grillaA
+			// 
+			this->grillaA->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->grillaA->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->Column1});
+			this->grillaA->Location = System::Drawing::Point(8, 217);
+			this->grillaA->Name = L"grillaA";
+			this->grillaA->Size = System::Drawing::Size(172, 147);
+			this->grillaA->TabIndex = 7;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Números";
+			this->Column1->Name = L"Column1";
+			// 
+			// grillaB
+			// 
+			this->grillaB->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->grillaB->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->dataGridViewTextBoxColumn1});
+			this->grillaB->Location = System::Drawing::Point(296, 217);
+			this->grillaB->Name = L"grillaB";
+			this->grillaB->Size = System::Drawing::Size(172, 147);
+			this->grillaB->TabIndex = 15;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this->dataGridViewTextBoxColumn1->HeaderText = L"Números";
+			this->dataGridViewTextBoxColumn1->Name = L"dataGridViewTextBoxColumn1";
+			// 
+			// grillaC
+			// 
+			this->grillaC->BackgroundColor = System::Drawing::SystemColors::ActiveBorder;
+			this->grillaC->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->grillaC->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->Column2});
+			this->grillaC->Location = System::Drawing::Point(656, 81);
+			this->grillaC->Name = L"grillaC";
+			this->grillaC->Size = System::Drawing::Size(165, 239);
+			this->grillaC->TabIndex = 16;
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Concatenados";
+			this->Column2->Name = L"Column2";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(742, 21);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(14, 13);
+			this->label7->TabIndex = 17;
+			this->label7->Text = L"C";
+			// 
+			// btningresarB
+			// 
+			this->btningresarB->Location = System::Drawing::Point(299, 173);
+			this->btningresarB->Name = L"btningresarB";
+			this->btningresarB->Size = System::Drawing::Size(75, 23);
+			this->btningresarB->TabIndex = 24;
+			this->btningresarB->Text = L"Ingresar";
+			this->btningresarB->UseVisualStyleBackColor = true;
+			this->btningresarB->Click += gcnew System::EventHandler(this, &Form1::btningresarB_Click);
+			// 
+			// btndefinirB
+			// 
+			this->btndefinirB->Location = System::Drawing::Point(299, 95);
+			this->btndefinirB->Name = L"btndefinirB";
+			this->btndefinirB->Size = System::Drawing::Size(75, 23);
+			this->btndefinirB->TabIndex = 23;
+			this->btndefinirB->Text = L"Definir";
+			this->btndefinirB->UseVisualStyleBackColor = true;
+			this->btndefinirB->Click += gcnew System::EventHandler(this, &Form1::btndefinirB_Click);
+			// 
+			// txtelementoB
+			// 
+			this->txtelementoB->Location = System::Drawing::Point(344, 134);
+			this->txtelementoB->Name = L"txtelementoB";
+			this->txtelementoB->Size = System::Drawing::Size(99, 20);
+			this->txtelementoB->TabIndex = 22;
+			// 
+			// txttamanoB
+			// 
+			this->txttamanoB->Location = System::Drawing::Point(344, 57);
+			this->txttamanoB->Name = L"txttamanoB";
+			this->txttamanoB->Size = System::Drawing::Size(99, 20);
+			this->txttamanoB->TabIndex = 21;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(291, 137);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(51, 13);
+			this->label8->TabIndex = 20;
+			this->label8->Text = L"Elemento";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(291, 56);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(46, 13);
+			this->label9->TabIndex = 19;
+			this->label9->Text = L"Tamaño";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(339, 9);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(14, 13);
+			this->label10->TabIndex = 18;
+			this->label10->Text = L"B";
+			// 
+			// btnconcatenar
+			// 
+			this->btnconcatenar->Location = System::Drawing::Point(577, 29);
+			this->btnconcatenar->Name = L"btnconcatenar";
+			this->btnconcatenar->Size = System::Drawing::Size(96, 40);
+			this->btnconcatenar->TabIndex = 25;
+			this->btnconcatenar->Text = L"Concatenar";
+			this->btnconcatenar->UseVisualStyleBackColor = true;
+			this->btnconcatenar->Click += gcnew System::EventHandler(this, &Form1::btnconcatenar_Click);
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(855, 407);
+			this->Controls->Add(this->btnconcatenar);
+			this->Controls->Add(this->btningresarB);
+			this->Controls->Add(this->btndefinirB);
+			this->Controls->Add(this->txtelementoB);
+			this->Controls->Add(this->txttamanoB);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->label10);
+			this->Controls->Add(this->label7);
+			this->Controls->Add(this->grillaC);
+			this->Controls->Add(this->grillaB);
+			this->Controls->Add(this->grillaA);
+			this->Controls->Add(this->btningresarA);
+			this->Controls->Add(this->btndefinirA);
+			this->Controls->Add(this->txtelementoA);
+			this->Controls->Add(this->txttamanoA);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaA))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaB))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grillaC))->EndInit();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void btndefinirA_Click(System::Object^  sender, System::EventArgs^  e)
+			 {int tam;
+			  tam=System::Convert::ToInt32(txttamanoA->Text);
+			  v1.set_tamano(tam);
+			  grillaA->RowCount=tam;
+
+			 }
+private: System::Void btndefinirB_Click(System::Object^  sender, System::EventArgs^  e) 
+		 { int tam2;
+		   tam2=System::Convert::ToInt32(txttamanoB->Text);
+		   v2.set_tamano(tam2);
+		   grillaB->RowCount=tam2;
+		 }
+
+private: System::Void btningresarA_Click(System::Object^  sender, System::EventArgs^  e) 
+		 { int ele;
+		 ele= System::Convert::ToInt32(txtelementoA->Text);
+		 v1.set_V(ele,pos);
+		 grillaA->Rows[pos]->Cells[0]->Value=ele;
+		 pos++;
+		 }
+private: System::Void btningresarB_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+		 int elem;
+		 elem= System::Convert::ToInt32(txtelementoB->Text);
+		 v2.set_V(elem,pos);
+		 grillaB->Rows[pos2]->Cells[0]->Value=elem;
+		 pos2++;
+		 
+		 }
+private: System::Void btnconcatenar_Click(System::Object^  sender, System::EventArgs^  e)
+		 { int tam3, tam2, tam1;
+		   tam1=v1.get_tamano(); // traigo los valores de tam1 y tam2 con el get
+		   tam2=v2.get_tamano();
+		   tam3=tam1+tam2; //digo a cuanto equivale tam3
+		   v3.set_tamano(tam3);// le envio el tam3 al set
+		   grillaC->RowCount=tam3; //para que se extienda la grillaC hasta el tamaño de tam3
+		   v3=v3.concatenar(v1,v2); //como al v3 no le ingresé elemento, estoy diciendo que va a ser igual vec3 que retorné de acá
+		   for(int k=0;k<v3.get_tamano();k++)
+		   {
+		   grillaC->Rows[k]->Cells[0]->Value=System::Convert::ToInt32(v3.get_V(k));//en ese espacio va a ir los valores del v3 que lo traigo con el get
+		   }
+
+		  
+		 }
+
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		 }
+};
+}
+
