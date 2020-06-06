@@ -1,0 +1,185 @@
+#include "StdAfx.h"
+#include "Cuadrado.h"
+#include "conio.h"
+#include "iostream"
+
+
+
+Cuadrado::Cuadrado(void) //Este es el metodo constructor
+	//Utilizamos Cuadrado::, por el nombre de nuestra clase que significa, lo que voy a trabajar ahorita pertenece a la clase Cuadrado
+{
+}
+int Cuadrado::Get_lado() //ESte programa retorna lado al form, es decir trabajamos con un atributo aquí y ese lo enviamos
+	{
+		return lado;
+}
+int Cuadrado::Get_area()
+	{
+		return area;
+}
+void Cuadrado::Set_lado(int l)// recogimos l de otro lugar y se la vamos a asignar a lado, que ese atributo utilizamos aca, esa variable
+	{
+		lado=l;
+}
+void Cuadrado::Set_area(int a)
+	{
+		area=a;
+}
+ int Cuadrado::Calcular() //Aquí es la operación que hago para obtener el area, el subprograma del button
+	{
+		area= lado*lado;
+		return area;
+}
+
+ //Es para trabajar todo lo que hicimos en el .h
+ 
+ #pragma once
+#include "iostream"
+class Cuadrado
+{private: //creamos los atributos
+  int lado;
+  int area;
+public: //metodos
+	Cuadrado(void); //metodo constructor que sirve para asiganar obejtos (cuadradito)
+	int Get_lado();
+	int Get_area();
+	void Set_lado(int l); 
+	void Set_area(int a);
+	int Calcular();
+};
+
+#pragma once
+#include "Cuadrado.h"
+#include "iostream"
+#include "msclr\marshal_cppstd.h"
+namespace Ejemplo2 {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace std;
+	using namespace msclr;
+
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Label^  label1;
+	protected: 
+	private: System::Windows::Forms::TextBox^  txtLado;
+	private: System::Windows::Forms::TextBox^  txtArea;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Button^  btnCalcular;
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->txtLado = (gcnew System::Windows::Forms::TextBox());
+			this->txtArea = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btnCalcular = (gcnew System::Windows::Forms::Button());
+			this->SuspendLayout();
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(24, 21);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(31, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Lado";
+			// 
+			// txtLado
+			// 
+			this->txtLado->Location = System::Drawing::Point(128, 22);
+			this->txtLado->Name = L"txtLado";
+			this->txtLado->Size = System::Drawing::Size(111, 20);
+			this->txtLado->TabIndex = 1;
+			// 
+			// txtArea
+			// 
+			this->txtArea->Location = System::Drawing::Point(128, 86);
+			this->txtArea->Name = L"txtArea";
+			this->txtArea->Size = System::Drawing::Size(111, 20);
+			this->txtArea->TabIndex = 3;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(24, 85);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(29, 13);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"Area";
+			// 
+			// btnCalcular
+			// 
+			this->btnCalcular->Location = System::Drawing::Point(87, 143);
+			this->btnCalcular->Name = L"btnCalcular";
+			this->btnCalcular->Size = System::Drawing::Size(120, 101);
+			this->btnCalcular->TabIndex = 4;
+			this->btnCalcular->Text = L"Calcular";
+			this->btnCalcular->UseVisualStyleBackColor = true;
+			this->btnCalcular->Click += gcnew System::EventHandler(this, &Form1::btnCalcular_Click);
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(284, 262);
+			this->Controls->Add(this->btnCalcular);
+			this->Controls->Add(this->txtArea);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->txtLado);
+			this->Controls->Add(this->label1);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void btnCalcular_Click(System::Object^  sender, System::EventArgs^  e)
+			 { Cuadrado cuadradito; // aquí asignamos el obejto cuadradito a la clase que hemos creado, va a utilizar los atributos y métodos de la clase;
+			   cuadradito.Set_lado(System::Convert::ToInt32(txtLado->Text)); //alguien escribió cuadradito en el form, yo voy a llamarlo acá con set, el valor de lado, en este caso cuadradito lo convertimos a int y lo enviamos para trabajar
+			   int areafin;
+			   areafin=cuadradito.Calcular(); //El subprograma que utilize para calcular el area, que hicimos en el cpp.
+			   txtArea->Text=System::Convert::ToString(areafin);
+			 }
+};
+}
