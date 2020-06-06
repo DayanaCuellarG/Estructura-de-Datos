@@ -1,0 +1,207 @@
+#include "StdAfx.h"
+#include "Vector.h"
+
+
+Vector::Vector(void)
+{ V[n]=0; //Vector se llene de ceros
+ tamano=0;
+}
+void Vector::set_V(int elemento, int pos)
+{ V[pos]= elemento;
+  
+}
+int Vector::get_V(int pos)
+	{ return V[pos];
+	}
+void Vector::set_tamano(int tam)
+	{ tamano=tam;
+	}
+int Vector::get_tamano()
+	{ return tamano;
+	}
+void Vector::calcular(int tam) //Si voy retornar un vector uso void y en el button pongo con for.
+    { int aux=3;
+         V[0]=1;
+		for (int k=1;k<tam;k++)
+        { V[k]=aux;
+		  aux= aux+3;
+        }
+	}
+  #pragma once
+#include "iostream"
+#include "conio.h"
+#include "math.h"
+#define n 50
+using namespace std;
+class Vector
+{
+private:
+	int V[n],tamano;
+public:
+	Vector(void);
+	void set_V(int elemento, int pos);
+	int get_V(int pos);
+	void set_tamano(int tam);
+	int get_tamano();
+	void calcular(int tam);
+};
+
+#pragma once
+#include "Vector.h"
+
+
+namespace Múltiplos5 {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace std;
+	Vector vector1;
+
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Label^  label1;
+	protected: 
+	private: System::Windows::Forms::TextBox^  txttamano;
+	private: System::Windows::Forms::Button^  btndefinir;
+	private: System::Windows::Forms::Button^  btncalcular;
+	private: System::Windows::Forms::DataGridView^  grilla;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column1;
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->txttamano = (gcnew System::Windows::Forms::TextBox());
+			this->btndefinir = (gcnew System::Windows::Forms::Button());
+			this->btncalcular = (gcnew System::Windows::Forms::Button());
+			this->grilla = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grilla))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(11, 22);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(46, 13);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Tamaño";
+			// 
+			// txttamano
+			// 
+			this->txttamano->Location = System::Drawing::Point(72, 21);
+			this->txttamano->Name = L"txttamano";
+			this->txttamano->Size = System::Drawing::Size(92, 20);
+			this->txttamano->TabIndex = 1;
+			// 
+			// btndefinir
+			// 
+			this->btndefinir->Location = System::Drawing::Point(197, 18);
+			this->btndefinir->Name = L"btndefinir";
+			this->btndefinir->Size = System::Drawing::Size(75, 23);
+			this->btndefinir->TabIndex = 2;
+			this->btndefinir->Text = L"Tamaño";
+			this->btndefinir->UseVisualStyleBackColor = true;
+			this->btndefinir->Click += gcnew System::EventHandler(this, &Form1::btndefinir_Click);
+			// 
+			// btncalcular
+			// 
+			this->btncalcular->Location = System::Drawing::Point(101, 78);
+			this->btncalcular->Name = L"btncalcular";
+			this->btncalcular->Size = System::Drawing::Size(75, 23);
+			this->btncalcular->TabIndex = 5;
+			this->btncalcular->Text = L"Calcular";
+			this->btncalcular->UseVisualStyleBackColor = true;
+			this->btncalcular->Click += gcnew System::EventHandler(this, &Form1::btncalcular_Click);
+			// 
+			// grilla
+			// 
+			this->grilla->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->grilla->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->Column1});
+			this->grilla->Location = System::Drawing::Point(20, 120);
+			this->grilla->Name = L"grilla";
+			this->grilla->Size = System::Drawing::Size(234, 105);
+			this->grilla->TabIndex = 6;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Numero";
+			this->Column1->Name = L"Column1";
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(284, 261);
+			this->Controls->Add(this->grilla);
+			this->Controls->Add(this->btncalcular);
+			this->Controls->Add(this->btndefinir);
+			this->Controls->Add(this->txttamano);
+			this->Controls->Add(this->label1);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grilla))->EndInit();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void btndefinir_Click(System::Object^  sender, System::EventArgs^  e)
+			 {int tam;
+			  tam=System::Convert::ToInt32(txttamano->Text);
+			  vector1.set_tamano(tam);
+			  grilla->RowCount=tam; //Para se abra las filas
+
+			 }
+private: System::Void btncalcular_Click(System::Object^  sender, System::EventArgs^  e) 
+		 { 
+			 vector1.calcular(vector1.get_tamano());
+		 for(int k=0;k<vector1.get_tamano();k++)
+		  {grilla->Rows[k]->Cells[0]->Value=vector1.get_V(k); //celdas 1 porque utilizamos una columna, el k del getvectr es k=pos
+		  }
+		 }
+};
+}
+
+
+
+  
