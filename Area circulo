@@ -1,0 +1,168 @@
+#pragma once
+
+namespace AreaCirculo {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Button^  Barea;
+	protected: 
+
+	protected: 
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::TextBox^  textBox2;
+	private: System::Windows::Forms::TextBox^  Tarea;
+	private: System::Windows::Forms::TextBox^  Tradio;
+
+
+
+
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->Barea = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->Tarea = (gcnew System::Windows::Forms::TextBox());
+			this->Tradio = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
+			// 
+			// Barea
+			// 
+			this->Barea->Location = System::Drawing::Point(45, 140);
+			this->Barea->Name = L"Barea";
+			this->Barea->Size = System::Drawing::Size(118, 109);
+			this->Barea->TabIndex = 0;
+			this->Barea->Text = L"AREA";
+			this->Barea->UseVisualStyleBackColor = true;
+			this->Barea->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(97, 30);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(13, 13);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"=";
+			this->label1->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(97, 77);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(13, 13);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"=";
+			this->label2->Click += gcnew System::EventHandler(this, &Form1::label2_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(9, 27);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(67, 20);
+			this->textBox1->TabIndex = 3;
+			this->textBox1->Text = L"RADIO";
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(12, 70);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(64, 20);
+			this->textBox2->TabIndex = 4;
+			this->textBox2->Text = L"AREA";
+			// 
+			// Tarea
+			// 
+			this->Tarea->Location = System::Drawing::Point(165, 70);
+			this->Tarea->Name = L"Tarea";
+			this->Tarea->Size = System::Drawing::Size(69, 20);
+			this->Tarea->TabIndex = 5;
+			// 
+			// Tradio
+			// 
+			this->Tradio->Location = System::Drawing::Point(165, 27);
+			this->Tradio->Name = L"Tradio";
+			this->Tradio->Size = System::Drawing::Size(69, 20);
+			this->Tradio->TabIndex = 6;
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(284, 261);
+			this->Controls->Add(this->Tradio);
+			this->Controls->Add(this->Tarea);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->Barea);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void label2_Click(System::Object^  sender, System::EventArgs^  e) {
+			 }
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+				 double r,a;
+				 float pi;
+				 pi= 3.1416;
+
+				 r= System::Double::Parse(Tradio->Text);
+				 a=r*r*pi;
+				 Tarea->Text=a.ToString();
+			 }
+	private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 }
+};
+}
+
