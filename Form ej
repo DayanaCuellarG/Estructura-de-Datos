@@ -1,0 +1,230 @@
+pragma once
+
+#include <iostream>
+#include <string>
+#include "Vector.h"
+#include <msclr\marshal_cppstd.h>
+
+
+namespace Ej12 {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+	using namespace std;
+    using namespace msclr::interop;
+	// Variable Global
+	Vector vector1; //creó objeto para primer vector
+	Vector vector2; //para el vector sin los repetidos
+	int pos=0;
+
+	/// <summary>
+	/// Summary for Form1
+	/// </summary>
+	public ref class Form1 : public System::Windows::Forms::Form
+	{
+	public:
+		Form1(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~Form1()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::Label^  Tamaño;
+	private: System::Windows::Forms::TextBox^  txttamano;
+	protected: 
+
+	private: System::Windows::Forms::Button^  btndefinir;
+	private: System::Windows::Forms::Button^  btnrepetidos;
+	private: System::Windows::Forms::TextBox^  txtrepetidos;
+
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Button^  btningresar;
+	private: System::Windows::Forms::TextBox^  txtnumero;
+
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::DataGridView^  grilla;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Column1;
+
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			this->Tamaño = (gcnew System::Windows::Forms::Label());
+			this->txttamano = (gcnew System::Windows::Forms::TextBox());
+			this->btndefinir = (gcnew System::Windows::Forms::Button());
+			this->btnrepetidos = (gcnew System::Windows::Forms::Button());
+			this->txtrepetidos = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btningresar = (gcnew System::Windows::Forms::Button());
+			this->txtnumero = (gcnew System::Windows::Forms::TextBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->grilla = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grilla))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// Tamaño
+			// 
+			this->Tamaño->AutoSize = true;
+			this->Tamaño->Location = System::Drawing::Point(12, 18);
+			this->Tamaño->Name = L"Tamaño";
+			this->Tamaño->Size = System::Drawing::Size(46, 13);
+			this->Tamaño->TabIndex = 0;
+			this->Tamaño->Text = L"Tamaño";
+			// 
+			// txttamano
+			// 
+			this->txttamano->Location = System::Drawing::Point(80, 18);
+			this->txttamano->Name = L"txttamano";
+			this->txttamano->Size = System::Drawing::Size(123, 20);
+			this->txttamano->TabIndex = 1;
+			// 
+			// btndefinir
+			// 
+			this->btndefinir->Location = System::Drawing::Point(236, 18);
+			this->btndefinir->Name = L"btndefinir";
+			this->btndefinir->Size = System::Drawing::Size(132, 28);
+			this->btndefinir->TabIndex = 2;
+			this->btndefinir->Text = L"Definir";
+			this->btndefinir->UseVisualStyleBackColor = true;
+			this->btndefinir->Click += gcnew System::EventHandler(this, &Form1::btndefinir_Click);
+			// 
+			// btnrepetidos
+			// 
+			this->btnrepetidos->Location = System::Drawing::Point(236, 130);
+			this->btnrepetidos->Name = L"btnrepetidos";
+			this->btnrepetidos->Size = System::Drawing::Size(132, 28);
+			this->btnrepetidos->TabIndex = 5;
+			this->btnrepetidos->Text = L"Repetidos";
+			this->btnrepetidos->UseVisualStyleBackColor = true;
+			this->btnrepetidos->Click += gcnew System::EventHandler(this, &Form1::btnrepetidos_Click);
+			// 
+			// txtrepetidos
+			// 
+			this->txtrepetidos->Location = System::Drawing::Point(102, 130);
+			this->txtrepetidos->Name = L"txtrepetidos";
+			this->txtrepetidos->Size = System::Drawing::Size(116, 20);
+			this->txtrepetidos->TabIndex = 4;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(1, 130);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(95, 13);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"Numeros repetidos";
+			// 
+			// btningresar
+			// 
+			this->btningresar->Location = System::Drawing::Point(236, 74);
+			this->btningresar->Name = L"btningresar";
+			this->btningresar->Size = System::Drawing::Size(132, 28);
+			this->btningresar->TabIndex = 8;
+			this->btningresar->Text = L"Ingresar";
+			this->btningresar->UseVisualStyleBackColor = true;
+			this->btningresar->Click += gcnew System::EventHandler(this, &Form1::btningresar_Click);
+			// 
+			// txtnumero
+			// 
+			this->txtnumero->Location = System::Drawing::Point(80, 74);
+			this->txtnumero->Name = L"txtnumero";
+			this->txtnumero->Size = System::Drawing::Size(123, 20);
+			this->txtnumero->TabIndex = 7;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(12, 74);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(44, 13);
+			this->label3->TabIndex = 6;
+			this->label3->Text = L"Numero";
+			// 
+			// grilla
+			// 
+			this->grilla->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->grilla->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->Column1});
+			this->grilla->Location = System::Drawing::Point(3, 212);
+			this->grilla->Name = L"grilla";
+			this->grilla->Size = System::Drawing::Size(215, 122);
+			this->grilla->TabIndex = 9;
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Numeros";
+			this->Column1->Name = L"Column1";
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(397, 441);
+			this->Controls->Add(this->grilla);
+			this->Controls->Add(this->btningresar);
+			this->Controls->Add(this->txtnumero);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->btnrepetidos);
+			this->Controls->Add(this->txtrepetidos);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->btndefinir);
+			this->Controls->Add(this->txttamano);
+			this->Controls->Add(this->Tamaño);
+			this->Name = L"Form1";
+			this->Text = L"Ejercicio 12";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->grilla))->EndInit();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+	private: System::Void btndefinir_Click(System::Object^  sender, System::EventArgs^  e) 
+			 {int tam;
+			  tam= System::Convert::ToInt32(txttamano->Text);
+			  vector1.Set_tamano(tam);// le estoy enviando el tamano a set para que asigne
+			  grilla->RowCount = tam;
+			  /*vector1.Set_tamano(tam); // asigno lo del textbox ya convertido al objeto arreglo
+			 grilla->RowCount=vector1.Get_tamano(); //RowCount es el nombre de la grilla, aquí están creciendo las filas
+			 */
+			 }
+private: System::Void btningresar_Click(System::Object^  sender, System::EventArgs^  e) 
+		 {int elemento; //defino elemento
+		  elemento=System::Convert::ToInt32(txtnumero->Text);// elemento le asigno al valor de lo que me pongan en ese textbox 
+		  vector1.Set_V(elemento, pos);// a Set_ V le voy a enviar elemento y pos para que haga lo suyo y obviamente dentro del objeto que se desee
+		  grilla->Rows[pos]->Cells[0]->Value = elemento; // en la grilla en la fila [pos] y la columna cero porque solo estamos usando una columna el valor va a ser el elemento
+		  pos++; //aumento la posicion porque en lo global la empece con cero
+		 }
+private: System::Void btnrepetidos_Click(System::Object^  sender, System::EventArgs^  e) 
+		 { int rep;
+		   rep= vector1.repetidos();
+		   txtrepetidos->Text = System::Convert::ToString(rep); // en ese textbox va a estar el valor de rep
+		 }
+};
+}
